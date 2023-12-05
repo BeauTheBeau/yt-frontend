@@ -1,0 +1,40 @@
+
+<!--
+    navbar
+        - navbar__left
+            - hamburger
+            - logo
+         - navbar__center
+            - search bar
+        - navbar__right
+            - new video
+-->
+
+<nav class="navbar">
+    <div class="navbar__left">
+
+        <div class="navbar__hamburger">
+            <i class="nf nf-md-menu"></i>
+        </div>
+
+        <div class="navbar__logo">
+            <a href="/">{{res.locals.site.title}}</a>
+        </div>
+    </div>
+
+    <div class="navbar__center">
+
+        <form action="/search" method="GET">
+            <input type="text" name="q" placeholder="Search library">
+            <button type="submit"><i class="nf nf-md-magnify"></i></button>
+        </form>
+
+    </div>
+
+    <div class="navbar__right">
+        <div class="navbar__new-video">
+            <a href="/newVideo"><i class="nf nf-md-video_plus"></i></a>
+        </div>
+    </div>
+
+</nav>
