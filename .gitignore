@@ -1,3 +1,7 @@
+### Project-Specific template
+/data/
+config.json
+
 ### VisualStudioCode template
 .vscode/*
 !.vscode/settings.json
