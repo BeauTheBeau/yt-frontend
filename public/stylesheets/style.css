@@ -1,0 +1,149 @@
+@import "https://www.nerdfonts.com/assets/css/webfont.css";
+:root[data-theme="light"] {
+  --text: rgb(22, 8, 22);
+  --background: rgb(248, 236, 248);
+  --primary: rgb(102, 39, 104);
+  --secondary: rgb(216, 228, 221);
+  --accent: rgb(154, 95, 55);
+  --text-transparent: rgba(22, 8, 22, 0.5);
+  --background-transparent: rgba(248, 236, 248, 0.5);
+  --primary-transparent: rgba(102, 39, 104, 0.5);
+  --secondary-transparent: rgba(216, 228, 221, 0.5);
+  --accent-transparent: rgba(154, 95, 55, 0.5); }
+
+:root[data-theme="dark"], :root:not([data-theme]), :root:not([data-theme="light"]) {
+  --text: rgb(247, 234, 247);
+  --border: rgb(247, 234, 247);
+  --background: rgb(19, 7, 19);
+  --primary: rgb(214, 149, 216);
+  --secondary: rgb(27, 39, 32);
+  --accent: rgb(199, 139, 100);
+  --text-transparent: rgba(247, 234, 247, 0.5);
+  --border-transparent: rgba(247, 234, 247, 0.2);
+  --background-transparent: rgba(19, 7, 19, 0.5);
+  --primary-transparent: rgba(214, 149, 216, 0.5);
+  --secondary-transparent: rgba(27, 39, 32, 0.5);
+  --accent-transparent: rgba(199, 139, 100, 0.5); }
+
+.navbar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1em;
+  padding: 0.5em;
+  background-color: var(--background-transparent);
+  backdrop-filter: blur(1em) brightness(0.8);
+  border-bottom: 1px solid var(--border-transparent);
+  transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+  .navbar .navbar__logo {
+    font-weight: bold; }
+  .navbar .navbar__center {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1em;
+    flex: 0.25; }
+    .navbar .navbar__center form {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 0.1em; }
+      .navbar .navbar__center form input {
+        flex: 1;
+        padding: 0.5em 1em;
+        border-radius: 1em 0.2em 0.2em 1em;
+        border: 1px solid var(--border-transparent);
+        background-color: var(--background-transparent);
+        color: var(--text);
+        text-align: center;
+        transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+        .navbar .navbar__center form input:hover, .navbar .navbar__center form input:focus {
+          outline: none;
+          border: 1px solid var(--primary);
+          background-color: var(--primary-transparent); }
+      .navbar .navbar__center form button {
+        height: 100%;
+        width: 3em;
+        padding: 0.5em;
+        border-radius: 0.2em 1em 1em 0.2em;
+        border: 1px solid var(--border-transparent);
+        background-color: var(--background-transparent);
+        color: var(--text);
+        cursor: pointer;
+        transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+        .navbar .navbar__center form button:focus, .navbar .navbar__center form button:hover {
+          outline: none;
+          border: 1px solid var(--primary);
+          background-color: var(--primary-transparent); }
+  .navbar > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1em; }
+  .navbar a, .navbar .navbar__hamburger {
+    text-decoration: none;
+    color: var(--text);
+    padding: 0.5em 1em;
+    background-color: var(--secondary);
+    border-radius: 0.5em;
+    border: 1px solid transparent;
+    transition: 0.1s cubic-bezier(0.4, 0, 0.2, 1); }
+    .navbar a:active, .navbar .navbar__hamburger:active {
+      border: 1px solid var(--border-transparent); }
+    .navbar a:hover, .navbar .navbar__hamburger:hover {
+      filter: brightness(1.2); }
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0.001ms !important; } }
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 1em 0 0.5em 0;
+  margin-block-end: 0; }
+
+h1, p {
+  margin: 0; }
+
+body, html {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%; }
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Lucida Gr ande", Helvetica, Arial, sans-serif;
+  background-color: var(--background);
+  color: var(--text);
+  transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+
+main {
+  padding: 1em; }
+
+a {
+  color: var(--primary); }
+
+.link__row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1em; }
+  .link__row-link {
+    text-decoration: none;
+    color: var(--primary);
+    padding: 0.5em 1em;
+    background-color: var(--primary-transparent);
+    border-radius: 0.5em;
+    transition: color 0.2s ease-in-out; }
+    .link__row-link:hover {
+      color: var(--secondary); }
+
+/*# sourceMappingURL=style.css.map */
