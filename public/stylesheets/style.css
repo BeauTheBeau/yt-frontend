@@ -1,11 +1,13 @@
 @import "https://www.nerdfonts.com/assets/css/webfont.css";
 :root[data-theme="light"] {
   --text: rgb(22, 8, 22);
+  --border: rgb(22, 8, 22);
   --background: rgb(248, 236, 248);
   --primary: rgb(102, 39, 104);
   --secondary: rgb(216, 228, 221);
   --accent: rgb(154, 95, 55);
   --text-transparent: rgba(22, 8, 22, 0.5);
+  --border-transparent: rgba(22, 8, 22, 0.2);
   --background-transparent: rgba(248, 236, 248, 0.5);
   --primary-transparent: rgba(102, 39, 104, 0.5);
   --secondary-transparent: rgba(216, 228, 221, 0.5);
@@ -101,17 +103,15 @@
       filter: brightness(1.2); }
 
 .video {
+  text-decoration: none;
+  color: var(--text);
   display: flex;
   flex-direction: column;
-  width: 100%;
-  max-width: 300px;
   border-radius: 0.5em;
   background-color: var(--background-secondary);
   border: 1px solid var(--border-transparent);
   padding: 0.5em;
   transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
-  .video:hover {
-    background-color: var(--background-secondary-hover); }
   .video__thumbnail {
     position: relative;
     aspect-ratio: 16/9;
@@ -132,13 +132,11 @@
       border-radius: 0.5em;
       z-index: 50;
       transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
-      .video__thumbnail-overlay a {
+      .video__thumbnail-overlay i {
         color: var(--text);
         font-size: 2em;
-        text-decoration: none; }
-      .video__thumbnail-overlay:hover {
-        opacity: 1;
-        background-color: rgba(0, 0, 0, 0.7); }
+        text-decoration: none;
+        aspect-ratio: 1/1; }
     .video__thumbnail img {
       position: absolute;
       top: 0;
@@ -168,8 +166,11 @@
       font-size: 1.2em; }
     .video__details-channel {
       font-size: 0.8em; }
-  .video:hover {
-    border: 1px solid var(--secondary); }
+  .video:hover, .video:focus-within {
+    border: 1px solid var(--secondary);
+    background-color: var(--secondary); }
+    .video:hover .video__thumbnail-overlay, .video:focus-within .video__thumbnail-overlay {
+      opacity: 1; }
 
 @media (prefers-reduced-motion: reduce) {
   * {
@@ -218,10 +219,9 @@ a {
       color: var(--secondary); }
 
 .video__grid {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 0.5rem; }
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1em; }
 
 .video__player-container {
   display: flex;
