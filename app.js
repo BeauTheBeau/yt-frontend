@@ -68,7 +68,9 @@ app.use(function (req, res, next) {
 
 // Routes
 const indexRouter = require('./routes/index');
+const videoRouter = require('./routes/video');
 app.use('/', indexRouter);
+app.use('/video', videoRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
