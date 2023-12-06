@@ -1,12 +1,10 @@
-<div class="video">
+<a class="video" href="watch?v={{video.id}}">
     <div class="video__thumbnail">
         <img src="{{video.thumbnail}}" alt="{{video.title}}">
 
         {{#if video.downloaded}}
             <div class="video__thumbnail-overlay">
-                <a href="watch?v={{video.id}}">
-                <i class="nf nf-md-play"></i>
-                </a>
+                    <i class="nf nf-md-play video__thumbnail-overlay-icon"></i>
             </div>
         {{/if}}
 
@@ -18,4 +16,4 @@
         <h3 class="video__details-title">{{video.title}}</h3>
         <p class="video__details-channel">{{video.channel}}</p>
     </div>
-</div>
+</a>
