@@ -87,3 +87,11 @@ app.use(function (err, req, res, next) {
 });
 
 module.exports = app;
+
+process.on('unhandledRejection', (reason, promise) => {
+    console.log('Unhandled Rejection at:', reason.stack || reason)
+});
+
+process.on('uncaughtException', function (err) {
+    console.error(err.stack);
+});
