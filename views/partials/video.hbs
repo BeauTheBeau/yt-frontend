@@ -1,0 +1,21 @@
+<div class="video">
+    <div class="video__thumbnail">
+        <img src="{{video.thumbnail}}" alt="{{video.title}}">
+
+        {{#if video.downloaded}}
+            <div class="video__thumbnail-overlay">
+                <a href="watch?v={{video.id}}">
+                <i class="nf nf-md-play"></i>
+                </a>
+            </div>
+        {{/if}}
+
+        <p class="video__duration">{{video.duration}}</p>
+
+    </div>
+
+    <div class="video__details">
+        <h3 class="video__details-title">{{video.title}}</h3>
+        <p class="video__details-channel">{{video.channel}}</p>
+    </div>
+</div>
