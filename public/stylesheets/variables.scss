@@ -1,11 +1,13 @@
 :root[data-theme="light"] {
   --text: rgb(22, 8, 22);
+  --border: rgb(22, 8, 22);
   --background: rgb(248, 236, 248);
   --primary: rgb(102, 39, 104);
   --secondary: rgb(216, 228, 221);
   --accent: rgb(154, 95, 55);
 
   --text-transparent: rgba(22, 8, 22, 0.5);
+  --border-transparent: rgba(22, 8, 22, 0.2);
   --background-transparent: rgba(248, 236, 248, 0.5);
   --primary-transparent: rgba(102, 39, 104, 0.5);
   --secondary-transparent: rgba(216, 228, 221, 0.5);

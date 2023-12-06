@@ -36,7 +36,7 @@ router.get('/watch', function(req, res, next) {
             const metadata = require(`../data/videos/${videoId}/metadata.json`);
 
             if (!metadata.downloaded) return res.redirect(`/newVideo?v=${videoId}`);
-            else return res.render('watch', {title: `${res.locals.site.title} | Watch`, res, video: metadata});
+            else return res.render('watch', {title: `${metadata.title} | ${res.locals.site.title}`, res, video: metadata});
 
         } catch (e) {
             return res.send('Invalid video URL');
@@ -67,6 +67,52 @@ router.get('/newVideo', function(req, res, next) {
     } else {
         res.render('newVideo', { title: `${res.locals.site.title} | New Video`, res, video: req.query.v });
     }
+});
+
+/* GET /search */
+router.get('/search', function(req, res, next) {
+
+    // Parameters
+    // - ?q = the search query
+
+    // If the q param is specified
+    if (req.query.q) {
+
+        // Get the search query
+        let searchQuery = req.query.q;
+        try {
+
+            // For each video in videos/
+            const fs = require('fs');
+            const videos = fs.readdirSync(config.storage.paths.videos);
+            let videoData = [];
+
+            videos.forEach(video => {
+                const metadata = require(`../data/videos/${video}/metadata.json`);
+                if (!metadata.downloaded) fs.unlinkSync(`./data/videos/${video}/metadata.json`);
+
+                videoData.push(metadata);
+            });
+
+            // Filter the videos based on the search query
+            const Fuse = require('fuse.js');
+            const options = {
+                includeScore: true,
+                keys: ['title', 'description', 'channel']
+            };
+
+            const fuse = new Fuse(videoData, options);
+            const result = fuse.search(searchQuery);
+
+            // Render the search results
+            res.render('search', { title: `${res.locals.site.title} | Search`, res, videos: result, query: searchQuery });
+
+        } catch (e) {
+            console.log(e);
+            return res.send('Invalid search query');
+        }
+    }
+
 });
 
 module.exports = router;
