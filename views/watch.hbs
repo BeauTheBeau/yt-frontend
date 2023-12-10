@@ -3,10 +3,11 @@
     <div class="video__player-container">
 
         <div class="video__player-container__viewport">
-            <video class="video__player" controls>
+            <video class="video__player" controls id="video">
                 <source src="video/stream?v={{video.id}}" type="video/webm">
                 Your browser does not support the video tag.
             </video>
+            <canvas id="ambient-mode"></canvas>
         </div>
 
         <div class="video__player-container__info">
@@ -33,7 +34,26 @@
         </div>
 
 
-
     </div>
 
 </main>
+
+<script defer>
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const canvas = document.getElementById('ambient-mode');
+        const ctx = canvas.getContext('2d');
+        const video = document.getElementById('video');
+
+        video.addEventListener('play', function () {
+            const $this = this; //cache
+            (function loop() {
+                if (!$this.paused && !$this.ended) {
+                    ctx.drawImage($this, 0, 0, canvas.width, canvas.height);
+                    setTimeout(loop, 1000 / 30); // drawing at 30fps
+                }
+            })();
+        }, 0);
+    });
+
+</script>
