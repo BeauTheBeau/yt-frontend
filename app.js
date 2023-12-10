@@ -53,6 +53,18 @@ hbs.registerHelper('format', function (data) {
     return data;
 });
 
+hbs.registerHelper('epochToDate', function (epoch) {
+
+    const date = new Date(epoch * 1000);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+
+    return `${day}/${month}/${year}`;
+
+});
+
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.use(logger('dev'));
