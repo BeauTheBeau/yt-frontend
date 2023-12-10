@@ -64,6 +64,16 @@ hbs.registerHelper('epochToDate', function (epoch) {
 
 });
 
+hbs.registerHelper('epochToTime', function (epoch) {
+
+    const date = new Date(epoch * 1000);
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+
+    return `${hours}:${minutes}`;
+
+});
+
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
