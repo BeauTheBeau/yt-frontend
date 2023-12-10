@@ -39,6 +39,20 @@ for (let i = 0; i < directories.length; i++) {
 // view engine setup
 hbs.registerPartials(path.join(__dirname, 'views/partials'));
 
+hbs.registerHelper('format', function (data) {
+    data = data.replace(/\n/g, '<br>');
+    data = data.replace(/(\d{1,2}:\d{1,2})/g, '<a href="#?t=$1">$1</a>');
+
+    data = data.replace(
+        /(\b(https?|ftp|file):\/\/([-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|]))/ig,
+        function (match, url) {
+            var domain = new URL(url).hostname;
+            return '<a href="' + url + '" target="_blank">' + domain + '</a>';
+        }
+    );
+    return data;
+});
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.use(logger('dev'));
