@@ -46,8 +46,8 @@ hbs.registerHelper('format', function (data) {
     data = data.replace(
         /(\b(https?|ftp|file):\/\/([-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|]))/ig,
         function (match, url) {
-            var domain = new URL(url).hostname;
-            return '<a href="' + url + '" target="_blank">' + domain + '</a>';
+            const domain = new URL(url).hostname;
+            return '<a href="' + url + '" target="_blank" title="' + url + '">' + domain + '</a>';
         }
     );
     return data;
