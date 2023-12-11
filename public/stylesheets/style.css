@@ -92,7 +92,7 @@
   .navbar a, .navbar .navbar__hamburger {
     text-decoration: none;
     color: var(--text);
-    padding: 0.5em 1em;
+    padding: 0.5em;
     background-color: var(--secondary);
     border-radius: 0.5em;
     border: 1px solid transparent;
@@ -306,5 +306,11 @@ a {
       color: var(--accent);
       background-color: var(--secondary);
       border: 1px solid var(--accent); }
+
+@media (max-width: 768px) {
+  main {
+    padding: 0.5em; }
+  .video__player-container {
+    padding: 0.5em; } }
 
 /*# sourceMappingURL=style.css.map */

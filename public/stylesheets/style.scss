@@ -186,3 +186,16 @@ a {
   }
 
 }
+
+// screen width: max 768px
+@media (max-width: 768px) {
+
+  main {
+    padding: 0.5em;
+  }
+
+  .video__player-container {
+    padding: 0.5em;
+  }
+
+}
