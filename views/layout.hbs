@@ -10,6 +10,23 @@
 
     <script src="javascript/theme.js"></script>
 
+    {{#if video}}
+
+        <meta property="keywords" content="{{video.categories}}"/>
+        <meta property="author" content="{{video.channel}}"/>
+
+        <meta property="og:title" content="{{video.title}}"/>
+        <meta property="og:type" content="video"/>
+        <meta property="og:image" content="{{video.thumbnail}}"/>
+        <meta property="og:url" content="{{video.url}}"/>
+
+        <meta property="og:site_name" content="{{title}}"/>
+
+        <meta property="og:video" content="{{video.url}}"/>
+        <meta property="og:video:secure_url" content="https://{{req.headers.host}}/video/stream?v={{video.id}}"/>
+
+    {{/if}}
+
 </head>
 <body>
 
