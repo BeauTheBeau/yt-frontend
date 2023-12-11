@@ -34,9 +34,10 @@ router.get('/watch', function(req, res, next) {
         let videoId = req.query.v;
         try {
             const metadata = require(`../data/videos/${videoId}/metadata.json`);
+            const domain = config.server.domain;
 
             if (!metadata.downloaded) return res.redirect(`/newVideo?v=${videoId}`);
-            else return res.render('watch', {title: `${metadata.title} | ${res.locals.site.title}`, res, video: metadata});
+            else return res.render('watch', {title: `${metadata.title} | ${res.locals.site.title}`, res, video: metadata, domain});
 
         } catch (e) {
             return res.send('Invalid video URL');

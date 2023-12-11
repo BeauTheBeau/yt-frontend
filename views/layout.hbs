@@ -20,10 +20,13 @@
         <meta property="og:image" content="{{video.thumbnail}}"/>
         <meta property="og:url" content="{{video.url}}"/>
 
-        <meta property="og:site_name" content="{{title}}"/>
+        <meta property="og:site_name" content="{{video.channel}}"/>
 
-        <meta property="og:video" content="{{video.url}}"/>
-        <meta property="og:video:secure_url" content="https://{{req.headers.host}}/video/stream?v={{video.id}}"/>
+        <meta property="og:video" content="https://{{domain}}/video/stream?v={{video.id}}"/>
+        <meta property="og:video:secure_url" content="https://{{domain}}/video/stream?v={{video.id}}"/>
+        <meta property="og:video:url" content="https://{{domain}}/video/stream?v={{video.id}}"/>
+        <meta property="og:video:type" content="video/webm"/>
+        <meta property="og:video:width" content="1280"/>
 
     {{/if}}
 
