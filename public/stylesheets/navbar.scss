@@ -42,8 +42,8 @@
         flex: 1;
         padding: 0.5em 1em;
         border-radius: 1em 0.2em 0.2em 1em;
-        border: 1px solid var(--border-transparent);
-        background-color: var(--background-transparent);
+        border: 1px solid transparent;
+        background-color: var(--secondary);
         color: var(--text);
         text-align: center;
         transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -52,7 +52,7 @@
         &:hover, &:focus {
           outline: none;
           border: 1px solid var(--primary);
-          background-color: var(--primary-transparent);
+          background-color: var(--background);
         }
       }
 
@@ -61,8 +61,8 @@
         width: 3em;
         padding: 0.5em;
         border-radius: 0.2em 1em 1em 0.2em;
-        border: 1px solid var(--border-transparent);
-        background-color: var(--background-transparent);
+        border: 1px solid transparent;
+        background-color: var(--secondary);
         color: var(--text);
         cursor: pointer;
 
@@ -71,7 +71,7 @@
         &:focus, &:hover {
           outline: none;
           border: 1px solid var(--primary);
-          background-color: var(--primary-transparent);
+          background-color: var(--background);
         }
       }
 

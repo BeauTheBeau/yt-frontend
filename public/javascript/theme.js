@@ -6,12 +6,12 @@ function setIcon(newTheme) {
     const icon = themeSwitcher.querySelector('i');
 
     if (newTheme === 'dark') {
-        icon.classList.add('nf-md-lightbulb_off_outline');
-        icon.classList.remove('nf-md-lightbulb');
+        icon.classList.add('nf-oct-moon');
+        icon.classList.remove('nf-oct-sun');
     }
     else {
-        icon.classList.add('nf-md-lightbulb');
-        icon.classList.remove('nf-md-lightbulb_off_outline');
+        icon.classList.add('nf-oct-sun');
+        icon.classList.remove('nf-oct-moon');
     }
 
 }

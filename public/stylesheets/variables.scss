@@ -1,13 +1,18 @@
+:root {
+  --white: #fff;
+}
+
 :root[data-theme="light"] {
   --text: rgb(22, 8, 22);
-  --border: rgb(22, 8, 22);
+  --border: rgb(54, 39, 54);
   --background: rgb(248, 236, 248);
+  --background-secondary: rgb(228, 216, 228);
   --primary: rgb(102, 39, 104);
   --secondary: rgb(216, 228, 221);
   --accent: rgb(154, 95, 55);
 
   --text-transparent: rgba(22, 8, 22, 0.5);
-  --border-transparent: rgba(22, 8, 22, 0.2);
+  --border-transparent: rgba(54, 39, 54, 0.2);
   --background-transparent: rgba(248, 236, 248, 0.5);
   --primary-transparent: rgba(102, 39, 104, 0.5);
   --secondary-transparent: rgba(216, 228, 221, 0.5);
@@ -18,6 +23,7 @@
   --text: rgb(247, 234, 247);
   --border: rgb(247, 234, 247);
   --background: rgb(19, 7, 19);
+  --background-secondary: rgb(39, 27, 39);
   --primary: rgb(214, 149, 216);
   --secondary: rgb(27, 39, 32);
   --accent: rgb(199, 139, 100);
