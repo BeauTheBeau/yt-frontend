@@ -35,6 +35,16 @@
         <div class="navbar__new-video">
             <a href="/newVideo"><i class="nf nf-md-video_plus"></i></a>
         </div>
+
+        <div class="navbar__theme-toggle" onclick="toggleTheme()" tabindex="0"
+             onkeydown="if (event.keyCode === 13) toggleTheme()" id="theme-toggle" title="Toggle theme">
+            <i class="nf"></i>
+        </div>
+
+        <script>
+            setIcon("{{res.locals.theme}}");
+        </script>
+
     </div>
 
 </nav>

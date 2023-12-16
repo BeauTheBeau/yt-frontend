@@ -86,7 +86,7 @@
     gap: 1em;
   }
 
-  a, .navbar__hamburger {
+  a, .navbar__hamburger, .navbar__theme-toggle {
 
     text-decoration: none;
     color: var(--text);
@@ -98,11 +98,11 @@
 
     transition: 0.1s cubic-bezier(0.4, 0, 0.2, 1);
 
-    &:active {
+    &:active, &:focus {
       border: 1px solid var(--border-transparent);
     }
 
-    &:hover {
+    &:hover, &:focus {
       filter: brightness(1.2);
     }
 

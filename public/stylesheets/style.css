@@ -89,7 +89,7 @@
     flex-direction: row;
     align-items: center;
     gap: 1em; }
-  .navbar a, .navbar .navbar__hamburger {
+  .navbar a, .navbar .navbar__hamburger, .navbar .navbar__theme-toggle {
     text-decoration: none;
     color: var(--text);
     padding: 0.5em;
@@ -97,9 +97,9 @@
     border-radius: 0.5em;
     border: 1px solid transparent;
     transition: 0.1s cubic-bezier(0.4, 0, 0.2, 1); }
-    .navbar a:active, .navbar .navbar__hamburger:active {
+    .navbar a:active, .navbar a:focus, .navbar .navbar__hamburger:active, .navbar .navbar__hamburger:focus, .navbar .navbar__theme-toggle:active, .navbar .navbar__theme-toggle:focus {
       border: 1px solid var(--border-transparent); }
-    .navbar a:hover, .navbar .navbar__hamburger:hover {
+    .navbar a:hover, .navbar a:focus, .navbar .navbar__hamburger:hover, .navbar .navbar__hamburger:focus, .navbar .navbar__theme-toggle:hover, .navbar .navbar__theme-toggle:focus {
       filter: brightness(1.2); }
 
 .video {

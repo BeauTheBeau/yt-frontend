@@ -40,10 +40,11 @@
 
 <script defer>
 
+    const video = document.getElementById('video');
+
     document.addEventListener('DOMContentLoaded', function () {
         const canvas = document.getElementById('ambient-mode');
         const ctx = canvas.getContext('2d');
-        const video = document.getElementById('video');
 
         video.addEventListener('play', function () {
             const $this = this; //cache
@@ -53,7 +54,31 @@
                     setTimeout(loop, 1000 / 30); // drawing at 30fps
                 }
             })();
-        }, 0);
+        });
     });
+
+    window.addEventListener('load', function () {
+
+        console.log("load");
+
+        // Add event listeners for mousedown and touchstart
+        video.addEventListener('mousedown', function () {
+            this.playbackRate = 2.0;
+            console.log("mousedown");
+        });
+        video.addEventListener('touchstart', function () {
+            this.playbackRate = 2.0;
+        });
+
+        // Add event listeners for mouseup and touchend
+        video.addEventListener('mouseup', function () {
+            this.playbackRate = 1.0;
+        });
+        video.addEventListener('touchend', function () {
+            this.playbackRate = 1.0;
+        });
+
+    });
+
 
 </script>
