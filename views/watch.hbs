@@ -2,13 +2,49 @@
 
     <div class="video__player-container">
 
-        <div class="video__player-container__viewport">
-            <video class="video__player" controls id="video">
+        <figure class="video__player-container__viewport" id="video-container">
+
+            <div id="video-controls" class="video__player-controls" data-state="hidden">
+
+
+                <div class="video__player-controls__top video__player-controls__section">
+                    <div class="progress">
+                        <progress id="progress" value="0" min="0">
+                            <span id="progress-bar"></span>
+                        </progress>
+                    </div>
+                </div>
+
+                <div class="video__player-controls__bottom video__player-controls__section">
+
+                    <div>
+
+                        <button id="playpause" type="button" data-state="play">Play/Pause</button>
+                        <button id="stop" type="button" data-state="stop">Stop</button>
+
+                    </div>
+                    <div>
+
+
+                        <button id="mute" type="button" data-state="mute">Mute/Unmute</button>
+                        <button id="volinc" type="button" data-state="volup">Vol+</button>
+                        <button id="voldec" type="button" data-state="voldown">Vol-</button>
+                        <button id="fs" type="button" data-state="go-fullscreen">Fullscreen</button>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <video class="video__player" id="video">
                 <source src="video/stream?v={{video.id}}" type="video/webm">
                 Your browser does not support the video tag.
             </video>
             <canvas id="ambient-mode"></canvas>
-        </div>
+        </figure>
+
+        <script defer src="javascript/video-player.js"></script>
 
         <div class="video__player-container__info">
             <h1 class="video__player-container__info__title">{{video.title}}</h1>
