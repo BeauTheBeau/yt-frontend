@@ -1,6 +1,7 @@
 @import "variables";
 @import "navbar";
 @import "video";
+@import "player";
 @import "https://www.nerdfonts.com/assets/css/webfont.css";
 
 // prefers reduced motion
@@ -81,6 +82,8 @@ a {
 }
 
 .video__player-container {
+
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -114,9 +117,7 @@ a {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      position: absolute;
-      top: 0;
-      left: 0;
+
       z-index: 1;
     }
   }
