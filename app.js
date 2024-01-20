@@ -61,16 +61,27 @@ hbs.registerHelper('epochToDate', function (epoch) {
     const year = date.getFullYear();
 
     return `${day}/${month}/${year}`;
-
 });
 
 hbs.registerHelper('epochToTime', function (epoch) {
-
     const date = new Date(epoch * 1000);
     const hours = date.getHours();
     const minutes = date.getMinutes();
 
     return `${hours}:${minutes}`;
+});
+
+hbs.registerHelper('formatTime', function (time) {
+
+    let hours = Math.floor(time / 3600);
+    let minutes = Math.floor((time - (hours * 3600)) / 60);
+    let seconds = Math.floor(time - (hours * 3600) - (minutes * 60));
+
+    if (hours < 10) hours = `0${hours}`;
+    if (minutes < 10) minutes = `0${minutes}`;
+
+    if (hours > 0) return `${hours}:${minutes}:${seconds}`;
+    else return `${minutes}:${seconds}`;
 
 });
 
@@ -104,9 +115,7 @@ app.use(function (req, res, next) {
 
 // Routes
 const indexRouter = require('./routes/index');
-const videoRouter = require('./routes/video');
 app.use('/', indexRouter);
-app.use('/video', videoRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
