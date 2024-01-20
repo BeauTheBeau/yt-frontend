@@ -4,7 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const sassMiddleware = require('node-sass-middleware');
-const config = require('./config');
+const config = require('../config.json');
 
 // Express + Handlebars
 const app = express();
@@ -114,7 +114,7 @@ app.use(function (req, res, next) {
 
 
 // Routes
-const indexRouter = require('./routes/index');
+const indexRouter = require('./routes');
 app.use('/', indexRouter);
 
 // catch 404 and forward to error handler
