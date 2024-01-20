@@ -17,11 +17,12 @@
     "handlebars": "^4.7.8",
     "hbs": "~4.2.0",
     "http-errors": "~2.0.0",
+    "mongoose": "^8.1.0",
     "morgan": "~1.10.0",
     "node-sass-middleware": "1.1.0",
     "youtube-dl-exec": "^2.4.17"
   },
-    "devDependencies": {
-        "nodemon": "^3.0.3"
-    }
+  "devDependencies": {
+    "nodemon": "^3.0.3"
+  }
 }
