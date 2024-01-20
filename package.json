@@ -20,6 +20,8 @@
     "mongoose": "^8.1.0",
     "morgan": "~1.10.0",
     "node-sass-middleware": "1.1.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0",
     "youtube-dl-exec": "^2.4.17"
   },
   "devDependencies": {

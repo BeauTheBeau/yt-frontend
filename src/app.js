@@ -1,144 +1,70 @@
-const createError = require('http-errors');
 const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
-const sassMiddleware = require('node-sass-middleware');
-const config = require('../config.json');
-
-// Express + Handlebars
+const { setupMiddleware } = require('./utils/middleware');
+const { handle404, handleError } = require('./utils/errorHandlers');
+const { initDirectories } = require('./utils/directoryManager');
+const { connectToDb } = require('./utils/db');
+const { createHelpers } = require('./utils/hbsHelpers');
+const indexRouter = require('./routes');
 const app = express();
-const hbs = require('hbs');
 
-// Make sure config.storage.video_path exists
-const fs = require('fs');
+const swaggerUi = require('swagger-ui-express');
 
-// Could be multiple levels deep, so we need to check each level
-// eg. ./data/videos
-function checkDir(dir, mkdir = true) {
-    if (mkdir) if (!fs.existsSync(dir)) fs.mkdirSync(dir);
-    else return fs.existsSync(dir);
-}
+// Initialize
+connectToDb();
+initDirectories();
+createHelpers();
+setupMiddleware(app);
 
-const directories = [ config.storage.paths.videos, config.storage.paths.processing, config.storage.paths.metadata ]
+// Swagger
+const swaggerOptions = {
+    swaggerDefinition: {
+        openapi: '3.0.0',
+        info: {
+            title: 'BeauTube',
+            version: '1.0.0',
+        },
+        authorization: {
+            type: 'apiKey',
+            in: 'header',
+            name: 'x-auth-token',
+        },
+        tags: [
+            {
+                name: 'Videos',
+                description: 'Video management',
+            },
+            {
+                name: 'Users',
+                description: 'User management',
+            },
+            {
+                name: 'Frontend',
+                description: 'Frontend routes, such as the home page',
+            }
+        ],
+        servers: [
+            {
+                url: 'http://localhost:3000',
+                description: 'Development server',
+            },            {
+                url: 'https://yt.beauthebeau.pro',
+                description: 'Production server',
+            },
+        ],
+    },
+    apis: ['./src/routes/*.js'],
+};
 
-// get each level of the path
-for (let i = 0; i < directories.length; i++) {
-    const dirs = directories[i].split('/');
-    let dir = '';
-
-    // loop through each level and check if it exists
-    for (let i = 0; i < dirs.length; i++) {
-        dir += dirs[i] + '/';
-        checkDir(dir);
-    }
-}
-
-
-
-// view engine setup
-hbs.registerPartials(path.join(__dirname, 'views/partials'));
-
-hbs.registerHelper('format', function (data) {
-    data = data.replace(/\n/g, '<br>');
-    data = data.replace(/(\d{1,2}:\d{1,2})/g, '<a href="#?t=$1">$1</a>');
-
-    data = data.replace(
-        /(\b(https?|ftp|file):\/\/([-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|]))/ig,
-        function (match, url) {
-            const domain = new URL(url).hostname;
-            return '<a href="' + url + '" target="_blank" title="' + url + '">' + domain + '</a>';
-        }
-    );
-    return data;
-});
-
-hbs.registerHelper('epochToDate', function (epoch) {
-
-    const date = new Date(epoch * 1000);
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-
-    return `${day}/${month}/${year}`;
-});
-
-hbs.registerHelper('epochToTime', function (epoch) {
-    const date = new Date(epoch * 1000);
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-
-    return `${hours}:${minutes}`;
-});
-
-hbs.registerHelper('formatTime', function (time) {
-
-    let hours = Math.floor(time / 3600);
-    let minutes = Math.floor((time - (hours * 3600)) / 60);
-    let seconds = Math.floor(time - (hours * 3600) - (minutes * 60));
-
-    if (hours < 10) hours = `0${hours}`;
-    if (minutes < 10) minutes = `0${minutes}`;
-
-    if (hours > 0) return `${hours}:${minutes}:${seconds}`;
-    else return `${minutes}:${seconds}`;
-
-});
-
-
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({extended: false}));
-app.use(cookieParser());
-app.use(sassMiddleware({
-    src: path.join(__dirname, 'public'),
-    dest: path.join(__dirname, 'public'),
-    indentedSyntax: false,
-    sourceMap: true
-}));
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(function (req, res, next) {
-
-    res.locals.site = {
-        title: config.site.name,
-        description: config.site.description,
-        url: config.site.url
-    };
-
-    if (req.cookies.theme) res.locals.theme = req.cookies.theme;
-    else res.locals.theme = 'light';
-    next();
-});
+const swaggerJsdoc = require('swagger-jsdoc');
+const swaggerSpec = swaggerJsdoc(swaggerOptions);
 
 
 // Routes
-const indexRouter = require('./routes');
 app.use('/', indexRouter);
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-    next(createError(404));
-});
-
-// error handler
-app.use(function (err, req, res, next) {
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-    // render the error page
-    res.status(err.status || 500);
-    res.render('error', {title: 'Express', res: res});
-});
+// Handling Errors
+app.use(handle404);
+app.use(handleError);
 
 module.exports = app;
-
-process.on('unhandledRejection', (reason, promise) => {
-    console.log('Unhandled Rejection at:', reason.stack || reason)
-});
-
-process.on('uncaughtException', function (err) {
-    console.error(err.stack);
-});
