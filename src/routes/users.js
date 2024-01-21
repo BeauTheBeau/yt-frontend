@@ -19,17 +19,14 @@ const config = require('../../config.json');
 router.post(
     '/register',
     [
-        check('username', 'Name is required').not().isEmpty(),
+        check('username', 'Username is required').not().isEmpty(),
         check('password', 'Password must be at least 6 characters long').isLength({ min: 6 }),
     ],
     async (req, res) => {
 
-        const { username, password } = req.body;
-        const handle = username.toLowerCase().replace(/[^a-z0-9]/g, "");
-        const newUser = new User({ username, password, handle });
-
-        const existingHandle = await User.findOne({ handle });
-        if (existingHandle) return sendApiResponse(res, 400, 'Handle already exists');
+        let { username, password } = req.body;
+        username = username.toLowerCase().replace(/[^a-z0-9]/g, "");
+        const newUser = new User({ username, password });
 
         const existingUser = await User.findOne({ username });
         if (existingUser) return sendApiResponse(res, 400, 'User already exists');

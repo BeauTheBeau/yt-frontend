@@ -8,7 +8,6 @@ const config = require("./../../config");
 const UserSchema = new Schema({
 
     username: { type: String, required: true, unique: true },
-    handle: { type: String, required: true, unique: true },
     password: { type: String, required: true, select: false },
 
     watched: { type: [{ type: Schema.Types.ObjectId, ref: 'Video' }], default: [] },
@@ -23,7 +22,6 @@ const UserSchema = new Schema({
 UserSchema.pre('save', function (next) {
 
     const user = this;
-    if (!user.handle) user.handle = user.username.toLowerCase().replace(/[^a-z0-9]/g, "");
 
     if (!user.isModified('password')) return next();
     bcrypt.genSalt(10, (err, salt) => {
