@@ -1,6 +1,7 @@
 const hbs = require('hbs');
 
 function registerHelpers(helpers) {
+    hbs.registerPartials(__dirname + '/../views/partials');
     Object.keys(helpers).forEach((name) => {
         hbs.registerHelper(name, helpers[name]);
     });
