@@ -1,6 +1,7 @@
-const {User} = require("./../schemas/User");
+const User = require("./../schemas/User");
 const jwt = require("jsonwebtoken");
 const {sendApiResponse} = require("../utilities/api");
+const config = require("../../config.json");
 
 /**
  * Authenticates the user by checking for an authentication header and cookie.
@@ -26,10 +27,10 @@ async function authenticate(req, res, next) {
     if (token.startsWith("Bearer ")) token = token.slice(7, token.length);
 
     try {
-        const decoded = jwt.decode(token, process.env.JWT_SECRET);
+        const decoded = jwt.decode(token, config.jwt.secret);
+        const username = decoded.username;
 
-        const userId = decoded.id;
-        const user = await User.findById(userId);
+        const user = await User.findOne({username: username});
         if (!user) return res.status(401).json({message: "Invalid token provided"});
 
         req.user = user;
