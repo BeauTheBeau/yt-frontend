@@ -66,7 +66,7 @@ router.post(
 
                 return sendApiResponse(res, 200, 'Logged in', {...user._doc, password: undefined});
             } else {
-                return sendApiResponse(res, 400, 'Invalid credentials provided');
+                return sendApiResponse(res, 401, 'Invalid credentials provided');
             }
 
         } catch (err) {
