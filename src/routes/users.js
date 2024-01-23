@@ -33,8 +33,19 @@ router.post(
 
         try {
             await newUser.save();
+
+            const options = {
+                maxAge: config.jwt.expiresInMs,
+                httpOnly: true,
+                secure: true
+            };
+
+            const token = newUser.generateJWT();
+            res.cookie('token', token, options);
+
             return sendApiResponse(res, 200, 'User registered', { user: newUser });
         } catch (err) {
+            console.log(err);
             return sendApiResponse(res, 500, 'Internal Server Error');
         }
     }
